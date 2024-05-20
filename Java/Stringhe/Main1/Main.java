@@ -1,57 +1,62 @@
-package Main1; 
+import java.util.Scanner;
 
-import java.util.Scanner; 
-
-public class Main { 
-    public static void main(String[] args) { 
-        Scanner scanner = new Scanner(System.in); 
-        System.out.println("Inserisci una stringa: "); // Stampiamo un messaggio per chiedere all'utente di inserire una stringa
-        String input = scanner.nextLine(); // Leggiamo la stringa inserita dall'utente e la salviamo nella variabile 'input'
-
-        // Lunghezza della stringa
-        int lunghezza = input.length(); // Calcoliamo la lunghezza della stringa e la salviamo nella variabile 'lunghezza'
-        System.out.println("Lunghezza della stringa: " + lunghezza); // Stampiamo la lunghezza della stringa
-
-        // Carattere in posizione centrale
-        char carattereCentrale = input.charAt(lunghezza / 2); // Troviamo il carattere centrale della stringa e lo salviamo nella variabile 'carattereCentrale'
-        System.out.println("Carattere in posizione centrale: " + carattereCentrale); // Stampiamo il carattere centrale
-
-        // Convertiamo in maiuscolo l'iniziale della stringa
-        // Convertiamo il primo carattere della stringa in maiuscolo 
-        //e lo salviamo nella variabile 'primaMaiuscola' commento per riga 22
-        String primaMaiuscola = input.substring(0, 1).toUpperCase() + input.substring(1);
-        System.out.println("Stringa con iniziale maiuscola: " + primaMaiuscola); // Stampiamo la stringa con l'iniziale maiuscola
-
-        // Numero di occorrenze del carattere 'a'
-        int conteggioA = 0; // Inizializziamo il conteggio delle occorrenze del carattere 'a' a 0
-        for (int i = 0; i < lunghezza; i++) { // Iteriamo attraverso tutti i caratteri della stringa
-            if (input.charAt(i) == 'a' || input.charAt(i) == 'A') { // Se il carattere corrente è 'a' o 'A'
-                conteggioA++; // Incrementiamo il conteggio delle occorrenze
+public class Main {
+    public static void main(String[] args) {
+        // Creazione di uno scanner per leggere l'input da tastiera
+        Scanner scanner = new Scanner(System.in);
+        
+        // Lettura della stringa in input
+        System.out.print("Inserisci una stringa: ");
+        String inputString = scanner.nextLine();
+        
+        // Stampa della lunghezza della stringa
+        System.out.println("Lunghezza della stringa: " + inputString.length());
+        
+        // Calcolo e stampa del carattere in posizione centrale
+        int middleIndex = inputString.length() / 2;
+        char middleChar = inputString.charAt(middleIndex);
+        System.out.println("Carattere in posizione centrale: " + middleChar);
+        
+        // Conversione in maiuscolo dell'iniziale della stringa e stampa
+        String firstCharUpperCase = inputString.substring(0, 1).toUpperCase() + inputString.substring(1);
+        System.out.println("Stringa con iniziale maiuscola: " + firstCharUpperCase);
+        
+        // Conteggio e stampa del numero di occorrenze del carattere 'a'
+        int countA = 0;
+        for (int i = 0; i < inputString.length(); i++) {
+            if (inputString.charAt(i) == 'a' || inputString.charAt(i) == 'A') {
+                countA++;
             }
         }
-        System.out.println("Numero di occorrenze del carattere 'a': " + conteggioA); // Stampiamo il numero di occorrenze del carattere 'a'
-
-        // Sottostringa dal primo al quarto carattere
-        String sottostringa = input.substring(0, 4); // Estraiamo una sottostringa dal primo al quarto carattere della stringa e la salviamo nella variabile 'sottostringa'
-        System.out.println("Sottostringa dal primo al quarto carattere: " + sottostringa); // Stampiamo la sottostringa
-
-        // Stringa in maiuscolo
-        String maiuscolo = input.toUpperCase(); // Convertiamo la stringa in maiuscolo e la salviamo nella variabile 'maiuscolo'
-        System.out.println("Stringa in maiuscolo: " + maiuscolo); // Stampiamo la stringa in maiuscolo
-
-        // Stringa in minuscolo
-        String minuscolo = input.toLowerCase(); // Convertiamo la stringa in minuscolo e la salviamo nella variabile 'minuscolo'
-        System.out.println("Stringa in minuscolo: " + minuscolo); // Stampiamo la stringa in minuscolo
-
+        System.out.println("Numero di occorrenze di 'a': " + countA);
+        
+        // Estrazione e stampa della sottostringa dal primo al quarto carattere
+        String subString = inputString.substring(0, Math.min(inputString.length(), 4));
+        System.out.println("Sottostringa dal primo al quarto carattere: " + subString);
+        
+        // Conversione della stringa in maiuscolo e stampa
+        String upperCaseString = inputString.toUpperCase();
+        System.out.println("Stringa in maiuscolo: " + upperCaseString);
+        
+        // Conversione della stringa in minuscolo e stampa
+        String lowerCaseString = inputString.toLowerCase();
+        System.out.println("Stringa in minuscolo: " + lowerCaseString);
+        
         // Controllo se la stringa è un palindromo
-        boolean palindromo = true; // Inizializziamo la variabile 'palindromo' a true
-        for (int i = 0; i < lunghezza / 2; i++) { // Iteriamo attraverso la metà dei caratteri della stringa
-            if (minuscolo.charAt(i) != minuscolo.charAt(lunghezza - i - 1)) { // Se i caratteri corrispondenti non sono uguali //metodo che restituisce il carattere nell'indice specificato in una stringa.
-                palindromo = false; // La stringa non è un palindromo
-                break; // Usciamo dal ciclo
+        boolean isPalindrome = true;
+        for (int i = 0; i < inputString.length() / 2; i++) {
+            if (inputString.charAt(i) != inputString.charAt(inputString.length() - 1 - i)) {
+                isPalindrome = false;
+                break;
             }
         }
-        System.out.println("La stringa è un palindromo? " + palindromo); // Stampiamo se la stringa è un palindromo o no
-        scanner.close(); // Chiudiamo lo scanner per liberare le risorse
-    } // Fine del metodo main
-} // Fine della classe Main
+        if (isPalindrome) {
+            System.out.println("La stringa è un palindromo.");
+        } else {
+            System.out.println("La stringa non è un palindromo.");
+        }
+        
+        // Chiudo lo scanner
+        scanner.close();
+    }
+}

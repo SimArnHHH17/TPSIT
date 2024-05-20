@@ -1,50 +1,62 @@
 import java.util.Scanner;
 
 public class Main {
-    
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Inserisci una stringa:");
-        String input = scanner.nextLine();
-        
-        System.out.println("Stringa in kebab-case: " + toKebabCase(input));
-        System.out.println("Stringa in snake_case: " + toSnakeCase(input));
-        System.out.println("Stringa in CamelCase: " + toCamelCase(input));
-        System.out.println("Stringa in PascalCase: " + toPascalCase(input));
-        
-        scanner.close();
-    }
-    
+
+    // Metodo per convertire una stringa in Kebab-case
+    // Kebab-case: le parole sono separate da trattini e tutte le lettere sono minuscole.
     public static String toKebabCase(String input) {
-        return input.replaceAll("\\s+", "-").toLowerCase();
+        // Converte l'intera stringa in minuscolo e sostituisce gli spazi con trattini.
+        return input.toLowerCase().replaceAll("\\s+", "-");
     }
-    
+
+    // Metodo per convertire una stringa in Snake_case
+    // Snake_case: le parole sono separate da trattini bassi e tutte le lettere sono minuscole.
     public static String toSnakeCase(String input) {
-        return input.replaceAll("\\s+", "_").toLowerCase();
+        // Converte l'intera stringa in minuscolo e sostituisce gli spazi con trattini bassi.
+        return input.toLowerCase().replaceAll("\\s+", "_");
     }
-    
+
+    // Metodo per convertire una stringa in CamelCase
+    // CamelCase: le parole sono concatenate senza spazi, con la prima lettera di ogni parola (tranne la prima) maiuscola.
     public static String toCamelCase(String input) {
-        StringBuilder result = new StringBuilder();
+        // Suddivide la stringa in parole utilizzando gli spazi come delimitatori.
         String[] words = input.split("\\s+");
-        for (int i = 0; i < words.length; i++) {
-            if (i == 0) {
-                result.append(words[i].toLowerCase());
-            } else {
-                result.append(Character.toUpperCase(words[i].charAt(0))) // metodo che restituisce il carattere nell'indice specificato in una stringa.
-                      .append(words[i].substring(1).toLowerCase());
-            }
+        // Inizializza una StringBuilder con la prima parola in minuscolo.
+        StringBuilder camelCaseString = new StringBuilder(words[0].toLowerCase());
+        // Itera attraverso le parole dalla seconda in poi.
+        for (int i = 1; i < words.length; i++) {
+            // Aggiunge la prima lettera maiuscola della parola corrente e il resto della parola in minuscolo.
+            camelCaseString.append(words[i].substring(0, 1).toUpperCase())
+                            .append(words[i].substring(1).toLowerCase());
         }
-        return result.toString();
+        return camelCaseString.toString();
     }
-    
+
+    // Metodo per convertire una stringa in PascalCase
+    // PascalCase: le parole sono concatenate senza spazi, con la prima lettera di ogni parola maiuscola.
     public static String toPascalCase(String input) {
-        StringBuilder result = new StringBuilder();
+        // Suddivide la stringa in parole utilizzando gli spazi come delimitatori.
         String[] words = input.split("\\s+");
+        // Inizializza una StringBuilder vuota.
+        StringBuilder pascalCaseString = new StringBuilder();
+        // Itera attraverso tutte le parole.
         for (String word : words) {
-            result.append(Character.toUpperCase(word.charAt(0))) // metodo che restituisce il carattere nell'indice specificato in una stringa.
-                  .append(word.substring(1).toLowerCase());
+            // Aggiunge la prima lettera maiuscola della parola corrente e il resto della parola in minuscolo.
+            pascalCaseString.append(word.substring(0, 1).toUpperCase())
+                            .append(word.substring(1).toLowerCase());
         }
-        return result.toString();
+        return pascalCaseString.toString();
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in); // Crea un oggetto Scanner per leggere l'input dell'utente.
+        System.out.print("Inserisci una stringa: ");
+        String input = scanner.nextLine(); // Legge la stringa inserita dall'utente.
+
+        // Stampa le varie conversioni della stringa inserita nei diversi formati.
+        System.out.println("Kebab-case: " + toKebabCase(input));
+        System.out.println("Snake_case: " + toSnakeCase(input));
+        System.out.println("CamelCase: " + toCamelCase(input));
+        System.out.println("PascalCase: " + toPascalCase(input));
     }
 }
-
